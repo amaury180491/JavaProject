@@ -3,11 +3,12 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
+
 public class PwdGen {
 
 
   public static String generatedPassword;
-  private static String pwd_1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  private static String pwd_1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901234567890123456789";
   public static String pwd_2 = "~`!@#$%^&*()-_=+\\\\\\\\|;:\\\\'\\\\\\\",<.>/?[]{}";
   private static String pwd_CapitalLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private static String pwd_LowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
@@ -28,7 +29,25 @@ public class PwdGen {
   private static boolean ExcAllLowercaseLetters = false;
   private static boolean ExcAllNumbers = false;
   private static char chart_1;
-  //private static String[] args = {"-E:0123456789"} ;
+  //private static String[] args = {"-E:ABCDEFGHIJKLMNOPQRSTUVWXYZ", "-U"} ;
+  
+  PwdGen(){
+	  
+	  pwdLength = 16;
+	  pwdNum = 1;
+	  capitalLetter = false;
+	  lowercaseLetters = false;
+	  numbers = false;
+	  specialSimb = false;
+	  ambiSimb = false;
+	  excSymbols = false;
+	  copyClipBoard = false;
+	  ExcAllCapitalLetters = false;
+	  ExcAllLowercaseLetters = false;
+	  ExcAllNumbers = false;
+	  newPwd ="";
+	  pwd_ExcSymbols ="";
+  }
   
   public static void main(String[] args) { 
     // This "for" control how many psw should be generated
@@ -103,12 +122,15 @@ public class PwdGen {
   
   public static void randomString (int length)  {
     
-    for (int i = 1; i<=length; i++) { 
+    for (int i = 0; i<length; i++) { 
       newPwd = newPwd+getRandomChar();
       
       if (specialSimb == true && getRandomNumber(0, 2) == 0 ) {
-        newPwd = newPwd+getSpecialRandomChar() ;
-        i++;
+    	  i++;
+    	  //Validate again for's validation because a bug that it was created 1 more char than requested
+    	  if(i<length) {
+    		  newPwd = newPwd+getSpecialRandomChar() ;
+    	  }
       } 
     }
     //Here is where the password is printed
@@ -132,12 +154,25 @@ public class PwdGen {
   //Method to obtain a random char
   public static char getRandomChar() {
     
-    if((ExcAllCapitalLetters == false && ExcAllLowercaseLetters == false && ExcAllNumbers == false) || (ExcAllCapitalLetters == true || ExcAllLowercaseLetters == true || ExcAllNumbers == true)){
+    if(ExcAllCapitalLetters == false && ExcAllLowercaseLetters == false && ExcAllNumbers == false){
       chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
     } else {
       chart_1 = pwd_2.charAt(getRandomNumber(0 , pwd_2.length()));
     }
-    
+   
+    if(ExcAllCapitalLetters == true && ExcAllLowercaseLetters == false && ExcAllNumbers == false) {
+      chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }else if(ExcAllCapitalLetters == false && ExcAllLowercaseLetters == true && ExcAllNumbers == false) {
+   	  chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }else if(ExcAllCapitalLetters == false && ExcAllLowercaseLetters == false && ExcAllNumbers == true) {
+   	  chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }else if(ExcAllCapitalLetters == true && ExcAllLowercaseLetters == true && ExcAllNumbers == false) {
+      chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }else if(ExcAllCapitalLetters == false && ExcAllLowercaseLetters == true && ExcAllNumbers == true) {
+      chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }else if(ExcAllCapitalLetters == true && ExcAllLowercaseLetters == false && ExcAllNumbers == true) {
+        chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
+    }
     
     if (capitalLetter == false) {
       if(charStringComparator(chart_1, pwd_CapitalLetter) == true) {
