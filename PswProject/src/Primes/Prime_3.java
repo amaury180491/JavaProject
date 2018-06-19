@@ -3,7 +3,7 @@ package Primes;
 public class Prime_3 {
 
 	public static long output;
-	public static int n = 1000;
+	public static int n = 1000000;
 
 	
     // Driver Program to test above function
@@ -149,7 +149,7 @@ public class Prime_3 {
         	
                 if(specialPrimes[i] != null) {
                 	specialCounter++;
-                 	System.out.println("Numero primo especial "+specialPrimes[i]);
+                 	//System.out.println("Numero primo especial "+specialPrimes[i]);
                 }
         }
         
