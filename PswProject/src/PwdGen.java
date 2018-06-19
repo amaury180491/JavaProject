@@ -173,7 +173,7 @@ public class PwdGen {
     }else if(ExcAllCapitalLetters == true && ExcAllLowercaseLetters == false && ExcAllNumbers == true) {
         chart_1 = pwd_1.charAt(getRandomNumber(0 , pwd_1.length()));
     }
-    
+
     if (capitalLetter == false) {
       if(charStringComparator(chart_1, pwd_CapitalLetter) == true) {
         getRandomChar();
