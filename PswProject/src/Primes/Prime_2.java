@@ -10,7 +10,17 @@ public class Prime_2 {
 
     public static void main(String[] args) {
     	
-    	long lStartTime = System.nanoTime();
+    	long lStartTime = System.currentTimeMillis();
+    	
+    
+    	PrimesGenerator();
+        long lEndTime = System.currentTimeMillis();
+        output = lEndTime - lStartTime;  
+        System.out.println("LAST PRIME = " + lastPrime);
+        System.out.println("Elapsed time in milliseconds: " + output);	      
+    } 
+    
+    public static void PrimesGenerator() {
     	
         while (currentNumber < NumberOfPrimes) {
 
@@ -37,10 +47,6 @@ public class Prime_2 {
                 currentNumber = currentNumber + 2;
             }
         }
-        
-        long lEndTime = System.nanoTime();
-        output = lEndTime - lStartTime;  
-        System.out.println("LAST PRIME = " + lastPrime);
-        System.out.println("Elapsed time in milliseconds: " + output / 1000000);	      
-    } 
+    	
+    }
 }
