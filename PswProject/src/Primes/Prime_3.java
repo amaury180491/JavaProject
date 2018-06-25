@@ -3,19 +3,19 @@ package Primes;
 public class Prime_3 {
 
 	public static long output;
-	public static int n = 1000000;
+	public static int n = 1000;
+	public static long lStartTime;
+	public static long lEndTime;
 
 	
     // Driver Program to test above function
     public static void main(String args[])
     {
-    	long lStartTime = System.currentTimeMillis();
+    	lStartTime = System.currentTimeMillis();
     	
     	cribadeEratostenesPrimos(n);
 
-        long lEndTime = System.currentTimeMillis();
-        output = lEndTime - lStartTime;  
-        System.out.println("Elapsed time in milliseconds: " + output);	        
+    	        
     }
     
     /**
@@ -144,12 +144,17 @@ public class Prime_3 {
 		}
 		
 	    // Print all prime numbers
+		
+		lEndTime = System.currentTimeMillis();
+        output = lEndTime - lStartTime;  
+        System.out.println("Elapsed time in milliseconds: " + output);	
+        
 		int specialCounter = 0;
         for(int i = 0; i < specialPrimes.length; i++){
         	
                 if(specialPrimes[i] != null) {
                 	specialCounter++;
-                 	//System.out.println("Numero primo especial "+specialPrimes[i]);
+                 	System.out.println("Numero primo especial "+specialPrimes[i]);
                 }
         }
         

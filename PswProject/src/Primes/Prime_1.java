@@ -1,53 +1,61 @@
 package Primes;
-import java.util.Scanner;
 
 public class Prime_1 {
 
-	public String s;
-	 public boolean isPrime;
-     public static int i =0;
-     public static int x =0;
-     public static int num =0;
-     public static int n = 10000;
-     public static int PrimeArray[] = new int[1000000];
-     public static long output;
-
-	public static void main(String[] args) {
-		
-		long lStartTime = System.nanoTime();
-
-	      for (i = 1; i <= n; i++){ 
-	    	  
-	      int counter=0; 	
-	      
-		     for(num =i; num>=1; num--){
-		    	 
-			    if(i%num==0){
-				counter = counter + 1;
-			    }
-			 }
-	     
-			 if (counter ==2){
-				 PrimeArray[x]=i;
-				 x++;
-				 System.out.println("Prime numbers # "+x+" to n are :"+ i);
-			 }	
-	      }	
-	      
-	      long lEndTime = System.nanoTime();
-	      output = lEndTime - lStartTime;  
-	      System.out.println("Elapsed time in milliseconds: " + output / 1000000);	      
-	}
-	
-	
-	public static void circularsNumbers() {
-
-		
-	
-		
-		
-	}
-	
-	
-
+    public static void main(String[] args) {
+    	
+    	long tiempoInicio = System.nanoTime();
+        int count = 0; 
+        int prime_count=0;
+        String CircularPrimes = ""; 
+        
+      for (long i = 2; i < 1000000; i++) {
+          if(isprime(i)){
+              prime_count++;
+            String num = i + "";
+            boolean a = false;
+            String temp = num;
+            
+            for (int j = 0; j < num.length(); j++) {
+                temp = temp.charAt(temp.length() - 1) + temp;
+                temp = temp.substring(0, temp.length() - 1);
+                
+            if(!isprime(Long.parseLong(temp))){
+                a=false;
+               break; 
+            }else{
+                a=true;
+            }
+            }
+            if (a) {
+            	CircularPrimes = CircularPrimes + temp + " ";
+                count++;
+            }
+      }   
+        }
+      
+  	long tiempoFinal = System.nanoTime();
+  	System.out.println("el tiempo es : "+ ((tiempoFinal - tiempoInicio) / 1000000000) + " Segundos");
+  	System.out.println("el tiempo es : "+ ((tiempoFinal - tiempoInicio) / 1000000) + " Milisegundos");
+  	
+        System.out.println("Conteo de primos : "+prime_count);
+        System.out.println("Numeros primos circulares detectados :" + count);
+        System.out.println("Numeros primos circulares detectados (Print) :" + CircularPrimes);
+    }
+    static boolean isprime(long num){
+            
+            boolean prime = true;
+            if (num == 2) {
+                prime = true;
+            } else if (num % 2 == 0) {
+                prime = false;
+            } else {
+                for (int j = 3; j <= Math.sqrt(num); j++) {
+                    if (num % j == 0) {
+                        prime = false;
+                    }
+                }
+            }
+      return prime; 
+    }
 }
